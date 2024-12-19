@@ -1,0 +1,18 @@
+services:
+  db:
+    build: 
+      context: ./database
+      dockerfile: Dockerfile
+    container_name: chica_aura_db
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: chica_aura
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_USER: usuario
+      MYSQL_PASSWORD: password
+    volumes:
+      - chica_aura_data:/var/lib/mysql
+
+volumes:
+  chica_aura_data: 
