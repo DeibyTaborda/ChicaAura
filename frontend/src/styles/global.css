@@ -6,4 +6,6 @@
 
 body{
     max-width: 100%;
+    background: rgb(52,27,88);
+    background: linear-gradient(90deg, rgba(52,27,88,1) 10%, rgba(171,25,114,1) 50%, rgba(52,27,88,1) 88%);
 }
