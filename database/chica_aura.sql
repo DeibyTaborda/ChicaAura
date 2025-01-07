@@ -17,6 +17,7 @@ CREATE TABLE usuario(
     apellido_usuario VARCHAR(30) NULL,
     correo_usuario VARCHAR(30) NOT NULL,
     telefono_usuario VARCHAR(10) NULL,
+    contrasena_usuario VARCHAR(100) NOT NULL,
     id_rol INT NOT NULL,
     status_usuario ENUM('ACTIVO', 'INACTIVO') DEFAULT 'ACTIVO',
     created_at_usuario TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
