@@ -64,5 +64,18 @@ exports.getUsers = async(req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Error en el servidor', error })
     }
+}
 
+exports.getContacts = async (req, res) => {
+    const sql = 'SELECT * FROM contacto';
+    
+    try {
+        const [contacts] = await db.query(sql);
+        if (contacts.length > 0) {
+            return res.status(200).json(contacts);
+        }
+        res.status(200).json({ message: 'No existen contactos' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error en el servidor', error })
+    }
 }
