@@ -8,7 +8,7 @@ exports.registerUser = async (req, res) => {
     try {
         if (!nombre_usuario) return res.status(400).json({ message: 'El nombre es obligatorio' });
         if (!correo_usuario) return res.status(400).json({ message: 'El correo es obligatorio' });
-        if (!validarCorreo(correo_contacto)) return res.status(400).json({ message: 'El correo no es válido' });
+        if (!validarCorreo(correo_usuario)) return res.status(400).json({ message: 'El correo no es válido' });
 
         await db.query(sql, [nombre_usuario, apellido_usuario, correo_usuario, contrasena_usuario, 1]);
 
@@ -53,4 +53,16 @@ exports.createContact = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'El contacto no se creó' });
     }
+}
+
+exports.getUsers = async(req, res) => {
+    const sql = 'SELECT * FROM usuario';
+    
+    try {
+        const [users] = await db.query(sql);
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(500).json({ message: 'Error en el servidor', error })
+    }
+
 }
