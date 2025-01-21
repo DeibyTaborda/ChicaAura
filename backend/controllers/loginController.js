@@ -18,12 +18,12 @@ exports.loguearUser = async (req, res) => {
 
             if (contrasena_usuario.trim() === user.contrasena_usuario.trim()) {
                 const token = jwt.sign(
-                    { id_usuario: user.id_usuario, name: user.nombre_usuario },
+                    { id_usuario: user.id_usuario, id_rol: user.id_rol, correo: user.correo_usuario },
                     jwt_password,
                     { expiresIn: '1h' }
                 );
 
-                res.status(201).json(token);
+                res.status(201).json({ token: token, rol: user.id_rol, id_user: user.id_usuario });
             } else {
                 res.status(401).json({ message: 'La contraseña es incorrecta' });
             }
@@ -33,5 +33,34 @@ exports.loguearUser = async (req, res) => {
         }
     } catch (error) {
         res.status(500).json({ message: 'Error en la consulta de base de datos', error });
+    }
+};
+
+exports.verificarToken = (req, res, next) => {
+    const header = req.header('Authorization') || "";
+    const token = header.split(' ')[1];
+
+    if (!token) {
+        return res.status(401).json({ message: "Token no proporcionado" });
+    } 
+
+    try {
+        const payload = jwt.verify(token, secret_key);
+        req.id_user = payload.id_usuario;
+        req.id_rol = payload.nombre_usuario;
+        req.email = payload.correo_usuario
+        next();
+    } catch (error) {
+        return res.status(401).json({ message: "Invalid token" });
+    }
+};
+
+exports.verificarRol = (rolesPermitidos) => (req, res, next) => {
+    const { rol } = req;
+
+    if (rolesPermitidos.includes(rol)) {
+        next();
+    } else {
+        return res.status(403).json({ message: 'No tienes permiso para acceder a esta ruta' });
     }
 };
