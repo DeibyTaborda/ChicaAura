@@ -79,3 +79,17 @@ exports.getContacts = async (req, res) => {
         res.status(500).json({ message: 'Error en el servidor', error })
     }
 }
+
+exports.getRoles = async (req, res) => {
+    const sql = 'SELECT * FROM rol';
+
+    try {
+        const [roles] = await db.query(sql);
+        if (roles.length > 0) {
+            return res.status(200).json(roles);
+        }
+        res.status(200).json({ message: 'No existen roles' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error en el servidor', error })
+    }
+}
