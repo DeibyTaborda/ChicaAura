@@ -1,17 +1,18 @@
+/* Estructura general */
+.login-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; Añadido para asegurar que el contenedor ocupe toda la altura de la pantalla */
+}
+
 .login {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: calc(100vh - 114px);
-}
-
-.login div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    padding: 30px;
     width: 20%;
     margin: 2rem;
     border-radius: 1.5rem;
@@ -19,7 +20,8 @@
     background-color: rgba(181, 181, 181, 0.5);
 }
 
-.login div div {
+/* Imagen del avatar */
+.login div {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,14 +30,15 @@
     border-radius: 100%;
 }
 
-.login div div img {
+.login div img {
     width: 100%;
     height: 100%;
     border-radius: 100%;
     object-fit: cover;
 }
 
-.login div form {
+/* Formulario */
+.login form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -43,7 +46,7 @@
     max-width: 90%;
 }
 
-.login div form .input-login  {
+.login form .input-login  {
     margin: 1rem 0 1rem 0;
     width: 100%;
     background-color: transparent;
@@ -53,33 +56,68 @@
     padding-bottom: 0.5rem;
 }
 
-.login div form .input-login::placeholder {
+.login form .input-login::placeholder {
     color: white;
 }
 
-.login div form input:focus {
+.login form input:focus {
     outline: none;
 }
 
-.login div form input:nth-child(3) {
+/* Botón de submit */
+.login form input:nth-child(3) {
     background-color: purple;
     border: none;
     width: 100%;
     height: 2rem;
-    margin: 3rem 0 3rem 0;
+    margin: 3rem 0 0 0;
     color: white;
     border-radius: 0.5rem;
     font-weight: bolder;
     background: rgb(52,27,88);
     background: linear-gradient(90deg, rgba(52,27,88,1) 10%, rgba(171,25,114,1) 50%, rgba(52,27,88,1) 88%);
-    cursor: pointer
+    cursor: pointer;
 }
 
-.login div form input:nth-child(3):hover {
+.login form input:nth-child(3):hover {
     background: rgb(52,27,88);
     background: linear-gradient(90deg, rgba(52,27,88,0.8) 10%, rgba(171,25,114,0.8) 50%, rgba(52,27,88,0.8) 88%);
 }
 
-.login div form .input-login:focus::placeholder {
+.login form .input-login:focus::placeholder {
     color: rgb(201, 198, 198);
+}
+
+/* Media Queries para Responsividad */
+
+/* Pantallas pequeñas */
+@media (max-width: 768px) {
+    .login {
+        width: 80%; /* Aumentamos el ancho en pantallas pequeñas */
+        padding: 20px;
+    }
+
+    .login-container {
+        height: auto; /* Se ajusta la altura para dispositivos pequeños */
+    }
+
+    .login div {
+        width: 60px;
+        height: 60px;
+    }
+
+    .login form .input-login {
+        font-size: 14px; /* Reducir tamaño de fuente */
+    }
+
+    .login form input:nth-child(3) {
+        height: 2.5rem; /* Hacer el botón más grande */
+    }
+}
+
+/* Pantallas más grandes */
+@media (min-width: 1024px) {
+    .login {
+        width: 25%; /* Aumentamos el ancho en pantallas grandes */
+    }
 }
