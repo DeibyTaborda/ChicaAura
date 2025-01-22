@@ -6,9 +6,9 @@ exports.loguearUser = async (req, res) => {
     const { correo_usuario, contrasena_usuario } = req.body;
     const sql = 'SELECT id_usuario, nombre_usuario, correo_usuario, contrasena_usuario, id_rol FROM usuario WHERE correo_usuario = ?';
 
-    if (!correo_usuario && !contrasena_usuario) return res.status(400).json({ message: 'Los campos de correo y contraseña son obligatorios' });
-    if (!correo_usuario) return res.status(400).json({ message: 'El campo de correo electrónico es obligatorio' });
-    if (!contrasena_usuario) return res.status(400).json({ message: 'Por favor, ingresa la contraseña' });
+    if (!correo_usuario && !contrasena_usuario) return res.status(400).json({ message: 'El correo y la contraseña son obligatorios' });
+    if (!correo_usuario) return res.status(400).json({ message: 'El correo es electrónico obligatorio' });
+    if (!contrasena_usuario) return res.status(400).json({ message: 'La contraseña es obligatoria' });
 
     try {
         const [resultado] = await db.query(sql, [correo_usuario]);
