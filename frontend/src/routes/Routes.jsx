@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { AuthProvider } from '../context/AuthContext';
 import Login from "../views/login/Login";
 import Home from "../views/home/Home";
 import About from "../views/about/About";
@@ -8,13 +9,15 @@ import Signup from "../views/signup/Signup";
 
 function RoutesChicaAura() {
     return (
-        <Routes>
-            <Route path="/home" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-        </Routes>
+        <AuthProvider>
+            <Routes>
+                <Route path="/home" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+            </Routes>
+        </AuthProvider>
     );
 }
 
