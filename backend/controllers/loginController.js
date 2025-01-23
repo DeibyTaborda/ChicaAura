@@ -45,9 +45,9 @@ exports.verificarToken = (req, res, next) => {
     } 
 
     try {
-        const payload = jwt.verify(token, secret_key);
+        const payload = jwt.verify(token, jwt_password);
         req.id_user = payload.id_usuario;
-        req.id_rol = payload.nombre_usuario;
+        req.id_rol = payload.id_rol;
         req.email = payload.correo_usuario
         next();
     } catch (error) {
