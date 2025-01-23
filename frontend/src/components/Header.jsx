@@ -14,14 +14,15 @@ function Header() {
 
       <nav>
         <ul>
-          <li><Link to="/home" className="link-header">Home</Link></li>
-          <li><Link to="/about" className="link-header">About</Link></li>
-          <li><Link to="/contact" className="link-header">Contact</Link></li>
-          
-          {!token && (
+          {token ? (
+            <li><Link to="/dashboard" className="link-header">Dashboard</Link></li>
+          ) : (
             <>
+              <li><Link to="/home" className="link-header">Home</Link></li>
+              <li><Link to="/about" className="link-header">About</Link></li>
+              <li><Link to="/contact" className="link-header">Contact</Link></li>
               <li><Link to="/login" className="link-header">Login</Link></li>
-              <li><Link to="/signup" className="link-header">Get account</Link></li>
+              <li><Link to="/signup" className="link-header">Get Account</Link></li>
             </>
           )}
         </ul>
