@@ -1,0 +1,21 @@
+.container-status-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 400px;
+    background-color: rgb(220, 180, 215);
+    padding: 20px 20px;
+}
+
+.icon-status-message {
+    color: rgb(50, 0, 50);
+    font-size: 50px;
+}
+
+.container-status-message p {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 18px;
+}

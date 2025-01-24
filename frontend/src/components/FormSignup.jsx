@@ -1,9 +1,12 @@
 import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { usePost } from "../services/usePost";
+import StatusMessage from "./StatusMessage";
+import { IoCheckmarkCircleOutline } from "react-icons/io5";
 import '../styles/formSignup.css';
 
 function FormSignup() {
+    const [existData, setExistData] = useState(false);
     const [datos, setDatos] = useState({
         nombre_usuario: '',
         apellido_usuario: '',
@@ -27,12 +30,30 @@ function FormSignup() {
 
     useEffect(()=> {
         if (data) {
-            navigate('../home');
+            setDatos({
+                nombre_usuario: '',
+                apellido_usuario: '',
+                correo_usuario: '',
+                contrasena_usuario: ''
+            });
+            setExistData(true);
+            setTimeout(() => {
+                setExistData(false);
+                navigate('../home');
+            }, 3000);
         }
     }, [data]);
 
     return(
-        <>
+        <>  
+            {existData && (
+                <div className="status-message">
+                    <StatusMessage
+                        Icon={IoCheckmarkCircleOutline}
+                        message={data ? data.message : ''}
+                    />
+                </div>
+            )}
             <form 
                 onSubmit={handleSubmit}
                 id="form-signup"
@@ -44,6 +65,7 @@ function FormSignup() {
                     id="nombre_usuario" 
                     placeholder="Name"
                     onChange={handleChange}
+                    value={datos.nombre_usuario}
                 />
                 <input 
                     type="text" 
@@ -51,6 +73,7 @@ function FormSignup() {
                     id="apellido_usuario" 
                     placeholder="Lastname"
                     onChange={handleChange}
+                    value={datos.apellido_usuario}
                 />
                 <input 
                     type="email" 
@@ -58,6 +81,7 @@ function FormSignup() {
                     id="correo_usuario" 
                     placeholder="Email"
                     onChange={handleChange}
+                    value={datos.correo_usuario}
                 />
                 <input  
                     type="password" 
@@ -65,6 +89,7 @@ function FormSignup() {
                     id="contrasena_usuario"
                     placeholder="Password" 
                     onChange={handleChange}
+                    value={datos.contrasena_usuario}
                 />
                 {error && (<p>{error.message}</p>)}
                 {data && (<p>{data.message}</p>)}
