@@ -10,10 +10,8 @@ body{
     background: linear-gradient(90deg, rgba(52,27,88,1) 10%, rgba(171,25,114,1) 50%, rgba(52,27,88,1) 88%);
 }
 
-input::placeholder {
-    color: white;
-}
-
-input:focus {
-    outline: none;
+:root {
+    --color-response-message: #333333;
+    --type-letter-response-message: serif;
+    --font-size-response-mesagge: 0.9rem;
 }

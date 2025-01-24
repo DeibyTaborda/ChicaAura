@@ -66,9 +66,9 @@
 }
 
 .login form p {
-    font-family: serif;
-    color: #333333;
-    font-size: 0.9rem;
+    font-family: var(--type-letter-response-message);
+    color: var(--color-response-message);
+    font-size: var(--font-size-response-mesagge);
 }
 
 /* Botón de submit */

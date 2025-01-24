@@ -4,11 +4,25 @@ const {validarCorreo} = require('../validations/validations');
 exports.registerUser = async (req, res) => {
     const { nombre_usuario, apellido_usuario, correo_usuario, contrasena_usuario} = req.body;
     const sql = 'INSERT INTO usuario (nombre_usuario, apellido_usuario, correo_usuario, contrasena_usuario, id_rol) VALUES (?, ?, ?, ?, ?)';
+    const sql2 = 'SELECT correo_usuario FROM usuario WHERE correo_usuario = ?';
 
     try {
+        if (
+            !nombre_usuario && 
+            !correo_usuario &&
+            !contrasena_usuario
+        ) {
+            return res.status(422).json({ message: 'Llena los campos obligatorios' });
+        }
         if (!nombre_usuario) return res.status(400).json({ message: 'El nombre es obligatorio' });
         if (!correo_usuario) return res.status(400).json({ message: 'El correo es obligatorio' });
         if (!validarCorreo(correo_usuario)) return res.status(400).json({ message: 'El correo no es válido' });
+
+        const [existUser] = await db.query(sql2, [correo_usuario]);
+
+        if (existUser.length > 0) {
+            return res.status(409).json({ message: 'Este correo ya está en uso' })
+        }
 
         await db.query(sql, [nombre_usuario, apellido_usuario, correo_usuario, contrasena_usuario, 1]);
 

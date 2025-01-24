@@ -2,10 +2,17 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 400px;
+    max-width: 350px;
     gap: 20px;
     background-color: rgba(181, 181, 181, 0.5);
-    padding: 10px;
+    padding: 50px;
+    font-family: 'Playfair Display', serif;
+    border-radius: 20px;
+}
+
+#form-signup h2 {
+    text-align: center;
+    color: #690F66;
 }
 
 #form-signup input:not([type="submit"]) {
@@ -13,7 +20,8 @@
     background-color: transparent;
     border: none;
     border-bottom: 1px solid white;
-    color: white;
+    color: rgb(206, 206, 206);
+    padding: 6px;
 }
 
 #form-signup input[type="submit"] {
@@ -28,4 +36,19 @@
     background: rgb(52,27,88);
     background: linear-gradient(90deg, rgba(52,27,88,1) 10%, rgba(171,25,114,1) 50%, rgba(52,27,88,1) 88%);
     cursor: pointer;
+}
+
+#form-signup input:focus:not([type="submit"]) {
+    outline: none;
+    border-color: rgb(206, 206, 206);
+}
+
+#form-signup input::placeholder {
+    color: rgb(206, 206, 206);
+}
+
+#form-signup p {
+    color: var(--color-response-message);
+    font-family: var(--type-letter-response-message);
+    font-size: var( --font-size-response-mesagge);
 }
